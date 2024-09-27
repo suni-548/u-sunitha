@@ -1,0 +1,17 @@
+def max_score(D, T, B):
+    max_score = float('-inf')
+    
+    current_score = sum((i + 1) * B[i] for i in range(T))
+    max_score = current_score
+    
+    for i in range(1, D - T + 1):
+        current_score -= sum((j + 1) * B[i - 1 + j] for j in range(T))
+        current_score += sum((j + 1) * B[i + j] for j in range(T))
+        max_score = max(max_score, current_score)
+    
+    return max_score
+
+D = 5
+T = 2
+B = [1, 2, 3, 4, 5]
+print(max_score(D, T, B))  # Expected output: 14
